@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Specifications</title>
+    {% load static %}
+    {% if game %}
+        <title>{{ game.name }}</title>
+    {% else %}
+        <title>Nenhum jogo encontrado</title>
+    {% endif %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'lucas_app/styles.css' %}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(to bottom, #c3a6ff, #8a72ff); /* Degradê suave com a paleta de cores */
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .game-specs {
+            background-color: #f0f0f0; /* Fundo do retângulo */
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%; /* Defina a largura do retângulo */
+            max-width: 600px; /* Defina a largura máxima do retângulo */
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Sombra suave para destacar */
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="game-specs">
+            <h1>Especificações do Jogo</h1>
+            {% if game %}
+                <h2>{{ game.name }}</h2>
+                <p>Memória: {{ specifications.memory }}</p>
+                <p>Placa Gráfica: {{ specifications.graphics_card }}</p>
+                <p>Processador: {{ specifications.cpu }}</p>
+                <p>Tamanho do Arquivo: {{ specifications.file_size }}</p>
+                <p>Sistema Operacional: {{ specifications.os }}</p>
+            {% else %}
+                <p>Nenhum jogo encontrado com esse nome.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+
+
