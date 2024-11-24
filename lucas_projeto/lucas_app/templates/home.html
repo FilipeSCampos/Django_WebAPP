@@ -3,118 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App do Luketa</title>
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'lucas_app/styles.css' %}">
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            min-height: 100vh; /* Altura mínima da página */
-            background-color: #B30953; /* Cor de fundo roxo pastel suave */
-            display: flex; /* Usado para alinhar a caixa do final ao rodapé */
-            flex-direction: column; /* Alinha os itens verticalmente */
-            justify-content: space-between; /* Alinha o conteúdo na vertical */
-            color: rgb(0, 0, 0); /* Cor do texto preto */
+            height: 100vh;
+            background: linear-gradient(to bottom, #c3a6ff, #8a72ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
         .container {
-            width: 80%;
-            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+        }
+        .search-box, .forum-box {
+            background-color: #f0f0f0;
             padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            flex: 1;
         }
-
-        header, footer {
-            background-color: #B30953; /* Cor de fundo roxo pastel */
-        }
-
-        .header, .footer {
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        .logo {
-            margin: 0;
+        .search-box h1, .forum-box h1 {
             font-size: 24px;
-            color: rgb(0, 0, 0); /* Cor do texto branco */
+            margin-bottom: 20px;
         }
-
-        .hero {
-            background-color: #B30953; /* Cor de fundo roxo pastel */
-            padding: 50px 0;
-            text-align: center;
-        }
-
-        .hero-title {
-            margin: 0;
-            font-size: 36px;
-            color: rgb(0, 0, 0,); /* Cor do texto branco */
-        }
-
-        .hero-text {
-            margin: 20px 0;
-            font-size: 18px;
-            color: rgb(0, 0, 0); /* Cor do texto branco */
-        }
-
-        /* Estilo da caixa de pesquisa */
-        .search-box {
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #451531; /* Cor de fundo branco */
-            border-radius: 5px; /* Borda arredondada */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-        }
-
-        select {
+        .search-box select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #451531; /* Borda cinza */
-            border-radius: 3px; /* Borda arredondada */
-            outline: none; /* Remove o contorno ao focar */
-            cursor: pointer; /* Altera o cursor ao passar por cima */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
         }
-
-        input[type="submit"] {
+        .search-box button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #6c5ce7;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .search-box button:hover {
+            background-color: #5a4bcf;
+        }
+        .logout-btn {
+            display: inline-block;
             margin-top: 10px;
             padding: 10px 20px;
-            background-color: #B30953; /* Cor de fundo roxo pastel */
-            color: rgb(0, 0, 0); /* Cor do texto branco */
-            border: none; /* Remove a borda */
-            border-radius: 3px; /* Borda arredondada */
-            cursor: pointer; /* Altera o cursor ao passar por cima */
+            background-color: #e74c3c; /* Vermelho suave */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+        .logout-btn:hover {
+            background-color: #c0392b;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <h1 class="logo">App do Luketa</h1>
+    <div class="container">
+        <!-- Caixa de pesquisa -->
+        <div class="search-box">
+            <h1>Pesquise por jogos</h1>
+            <form method="GET" action="{% url 'search' %}">
+                <select name="query">
+                    <option value="">Selecione um jogo</option>
+                    {% for game in games %}
+                    <option value="{{ game.name }}">{{ game.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Pesquisar</button>
+            </form>
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
         </div>
-    </header>
 
-    <section class="hero">
-        <div class="container">
-            <h2 class="hero-title">Bem-vindo ao Nosso Aplicativo</h2>
-            <p class="hero-text">Encontre os melhores jogos e suas especificações aqui.</p>
-            <!-- Caixa de pesquisa -->
-            <div class="search-box">
-                <form method="GET" action="{% url 'search' %}">
-                    <select name="query">
-                        <option value="">Selecione um jogo</option>
-                        {% for game in games %}
-                        <option value="{{ game.name }}">{{ game.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <input type="submit" value="Pesquisar">
-                </form>
+        <!-- Fórum de discussão -->
+        <div class="forum-box">
+            <h1>Fórum de Discussão</h1>
+            <div class="message-list">
+                {% for message in messages %}
+                <div class="message">
+                    <p class="username">{{ message.user.username }}</p>
+                    <p>{{ message.content }}</p>
+                    <p class="timestamp">{{ message.timestamp|date:"d/m/Y H:i" }}</p>
+                </div>
+                {% endfor %}
             </div>
+            <form method="POST">
+                {% csrf_token %}
+                {{ message_form.as_p }}
+                <button type="submit">Enviar</button>
+            </form>
         </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 App do Luketa. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+    </div>
 </body>
 </html>

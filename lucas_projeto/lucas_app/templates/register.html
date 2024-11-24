@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'lucas_app/styles.css' %}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(to bottom, #c3a6ff, #8a72ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-box {
+            background-color: #f0f0f0;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .form-box h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .form-box form {
+            margin-bottom: 20px;
+        }
+        .form-box button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #6c5ce7;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .form-box button:hover {
+            background-color: #5a4bcf;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-box">
+        <h1>Cadastro</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Registrar</button>
+        </form>
+    </div>
+</body>
+</html>

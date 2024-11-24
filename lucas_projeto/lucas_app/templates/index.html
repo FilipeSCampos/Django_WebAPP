@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'lucas_app/styles.css' %}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(to bottom, #c3a6ff, #8a72ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .welcome-box {
+            background-color: #f0f0f0;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .welcome-box h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .welcome-box p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .welcome-box a {
+            display: inline-block;
+            margin: 10px 20px;
+            padding: 10px 20px;
+            background-color: #6c5ce7;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .welcome-box a:hover {
+            background-color: #5a4bcf;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-box">
+        <h1>Bem-vindo ao App do Luketa</h1>
+        <p>Por favor, faça login ou registre-se para continuar.</p>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Cadastro</a>
+    </div>
+</body>
+</html>

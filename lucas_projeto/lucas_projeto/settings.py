@@ -132,3 +132,9 @@ STATICFILES_FINDERS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'lucas_app.CustomUser'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/home/'  # Para onde o usuário é redirecionado após login
+LOGOUT_REDIRECT_URL = '/'  # Para onde o usuário é redirecionado após logout
